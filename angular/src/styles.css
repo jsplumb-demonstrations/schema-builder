@@ -4,8 +4,8 @@
 @import "../node_modules/@jsplumbtoolkit/browser-ui/css/jsplumbtoolkit-controls.css";
 
 /* import the styles from the non-angular schema builder demo css*/
-@import "../../vanilla/app.css";
-@import "../../vanilla/theme.default.css";
+@import "../../es6/app.css";
+@import "../../es6/theme.default.css";
 
 
 .jtk-surface {
