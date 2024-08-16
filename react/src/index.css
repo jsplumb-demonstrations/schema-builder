@@ -4,3 +4,7 @@
 .jtk-surface {
   width:100%;
 }
+
+.jtk-miniview {
+  position: absolute;
+}

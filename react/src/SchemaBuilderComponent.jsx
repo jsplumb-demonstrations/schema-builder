@@ -21,44 +21,25 @@ import {
 } from "@jsplumbtoolkit/browser-ui"
 
 import {
-    JsPlumbToolkitSurfaceComponent,
-    JsPlumbToolkitMiniviewComponent,
-    ControlsComponent
+    SurfaceComponent,
+    MiniviewComponent,
+    PaletteComponent,
+    ControlsComponent,
+    SurfaceProvider
 } from "@jsplumbtoolkit/browser-ui-react";
 
-import InspectorComponent from './InspectorComponent'
+import SchemaInspector from './InspectorComponent'
 import TableComponent from './TableComponent'
 import ViewComponent from './ViewComponent'
 import ColumnComponent from './ColumnComponent'
 
 import { cardinalities, edgeMappings } from "./definitions";
 import { COLUMNS, COMMON, TABLE} from "./constants";
-import DragDropNodeSource from "./drag-drop-node-source";
+import SchemaPalette from "./SchemaPalette";
 
 export default function SchemaBuilderComponent() {
 
     const surfaceComponent = useRef(null)
-    const miniviewContainer = useRef(null)
-    const controlsContainer = useRef(null)
-    const paletteContainer = useRef(null)
-    const inspectorContainer = useRef(null)
-
-    function dataGenerator (el) {
-        const type = el.getAttribute("data-type"),
-            base = {
-                name:el.getAttribute("data-type"),
-                type
-            };
-
-        if (type === TABLE) {
-            base.columns = []
-        } else {
-            base.query =''
-        }
-
-        return base
-
-    }
 
     const toolkit = newInstance({
         // the name of the property in each node's data that is the key for the data for the ports for that node.
@@ -166,45 +147,25 @@ export default function SchemaBuilderComponent() {
         }
     }
 
-    useEffect(() => {
-
-        const cc = createRoot(controlsContainer.current)
-        cc.render(<ControlsComponent surface={surfaceComponent.current.surface}/>)
-
-        const m = createRoot(miniviewContainer.current)
-        m.render(<JsPlumbToolkitMiniviewComponent surface={surfaceComponent.current.surface}/>)
-
-        const i = createRoot(inspectorContainer.current)
-        i.render(<InspectorComponent surface={surfaceComponent.current.surface}/>)
-
-        const paletteRoot = createRoot(paletteContainer.current)
-        paletteRoot.render(
-        <DragDropNodeSource
-        surface={surfaceComponent.current.surface}
-        selector={"div"}
-        container={paletteContainer.current}
-        dataGenerator={dataGenerator}
-        />)
-
-        toolkit.load({
-            url:'/schema-1.json'
-        })
-
-    }, [])
-
     return <div style={{width:"100%",height:"100%",display:"flex"}}>
-<div className="jtk-demo-canvas">
-        <JsPlumbToolkitSurfaceComponent renderParams={renderParams} toolkit={toolkit} view={view} ref={ surfaceComponent }/>
-    <div className="jtk-controls-container" ref={ controlsContainer }/>
-    <div className="miniview" ref={ miniviewContainer }/>
-    </div>
-    <div className="jtk-demo-rhs">
-        <div id="palette" className="jtk-schema-palette" ref={paletteContainer}/>
-    <div id="inspector" ref={inspectorContainer}/>
-    <div className="description">
-        <p>This sample application is a builder for database schemas.</p>
-    </div>
-    </div>
+        <SurfaceProvider>
+            <div className="jtk-demo-canvas">
+                <SurfaceComponent renderOptions={renderParams} toolkit={toolkit} viewOptions={view} ref={ surfaceComponent } url='/public/schema-1.json'>
+                    <ControlsComponent/>
+                    <MiniviewComponent/>
+                </SurfaceComponent>
+            </div>
+            <div className="jtk-demo-rhs">
+
+                <SchemaPalette/>
+
+                <SchemaInspector/>
+
+                <div className="description">
+                    <p>This sample application is a builder for database schemas.</p>
+                </div>
+            </div>
+        </SurfaceProvider>
     </div>
 
 }

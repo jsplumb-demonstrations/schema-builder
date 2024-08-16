@@ -2,7 +2,7 @@
  * Base datatype, defined for convenience.
  * @public
  */
-import {LabelOverlay, ObjectData} from "@jsplumbtoolkit/browser-ui"
+import {LabelOverlay} from "@jsplumbtoolkit/browser-ui"
 import {
     CLASS_SCHEMA_RELATIONSHIP_CARDINALITY,
     DATATYPE_DATE,
