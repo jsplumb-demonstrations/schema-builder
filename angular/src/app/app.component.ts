@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core'
-import {BrowserUIAngular, jsPlumbService, jsPlumbSurfaceComponent} from "@jsplumbtoolkit/browser-ui-angular"
+import {BrowserUIAngular, jsPlumbService, SurfaceComponent} from "@jsplumbtoolkit/browser-ui-angular"
 import {AnchorLocations, consume, DEFAULT,
   DotEndpoint,
   Edge,
@@ -19,7 +19,7 @@ import {cardinalities, edgeMappings, Relationship} from "./definitions"
 export class AppComponent implements AfterViewInit {
 
   // @ts-ignore
-  @ViewChild(jsPlumbSurfaceComponent) surfaceComponent:jsPlumbSurfaceComponent;
+  @ViewChild(SurfaceComponent) surfaceComponent:SurfaceComponent;
 
   // @ts-ignore
   toolkit:BrowserUIAngular
