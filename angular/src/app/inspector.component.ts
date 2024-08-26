@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input} from "@angular/core"
-import {jsPlumbService} from "@jsplumbtoolkit/browser-ui-angular"
+import {DEFAULT_ANGULAR_SURFACE_ID, jsPlumbService} from "@jsplumbtoolkit/browser-ui-angular"
 import {Base, Inspector, Edge, isNode, isPort } from "@jsplumbtoolkit/browser-ui"
 
 
@@ -67,7 +67,7 @@ export class InspectorComponent implements AfterViewInit {
     currentType:string = ''
 
     // @ts-ignore
-    @Input() surfaceId:string
+    @Input() surfaceId:string = DEFAULT_ANGULAR_SURFACE_ID
 
   // expose these on the class so the jtk-edge-type component can pick them up.
   edgeMappings = edgeMappings
