@@ -121,7 +121,7 @@ body {
     font-size: 12px;
     background-color: white;
     z-index: 12;
-    overflow: hidden;
+
     min-width: 80px;
     min-height: 30px;
     width: auto;
@@ -165,8 +165,9 @@ body {
 .jtk-schema-table-columns {
     display: flex;
     flex-direction: column;
-    overflow: auto;
-    position:relative;
+
+    /*overflow: auto;
+    position:relative;*/
 }
 
 .jtk-schema-table-column {
@@ -174,6 +175,8 @@ body {
     display: flex;
     align-items: center;
     border:2px solid transparent;
+
+    position: relative;
 }
 
 .jtk-schema-table-column-edit {
@@ -196,6 +199,42 @@ body {
 
 .jtk-schema-table-column-delete {
 /*@include aDeleteButton;*/
+}
+
+/*
+connect buttons. circles on the left and right; display:none by default.
+ */
+.jtk-schema-table-column-connect {
+    position:absolute;
+    width:10px;
+    height:10px;
+    border-radius: 50%;
+    background-color: coral;
+    top: 50%;
+    transform: translate(0,-50%);
+    display:none;
+}
+
+.jtk-schema-table-column-connect-left {
+    left:-7px;
+}
+
+.jtk-schema-table-column-connect-right {
+    right:-7px;
+}
+
+/**
+on table node hover, show the connect nodes
+ */
+.jtk-schema-table:hover .jtk-schema-table-column-connect {
+    display:block;
+}
+
+/**
+except dont show the connect nodes on table hover if there's an edge being dragged
+ */
+.jtk-surface-edge-dragging .jtk-schema-table:hover .jtk-schema-table-column-connect {
+    display:none;
 }
 
 /* ----------------------------------------------------------------------------------------------------- */
