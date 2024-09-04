@@ -140,7 +140,7 @@
                 return {
                     dragOptions: {
                         filter:[
-                            "jtk-delete-button", "jtk-add-button", "jtk-schema-add"
+                            ".jtk-delete-button", ".jtk-add-button", ".jtk-schema-add", ".jtk-schema-table-column"
                         ].join(",")
                     },
                     plugins:[
@@ -159,14 +159,6 @@
                         type: ForceDirectedLayout.type,
                         options: {
                             padding: {x:150, y:150}
-                        }
-                    },
-                    defaults:{
-                        endpoint:{
-                            type:DotEndpoint.type,
-                            options:{
-                                cssClass:".jtk-schema-endpoint"
-                            }
                         }
                     },
                     consumeRightClick:false
