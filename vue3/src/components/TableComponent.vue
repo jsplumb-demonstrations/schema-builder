@@ -9,7 +9,13 @@
             </div>
         </div>
         <div class="jtk-schema-table-columns">
-            <ColumnComponent v-for="c in obj.columns" :key="c.id" v-bind:obj="c" v-bind:vertex="getNode()"></ColumnComponent>
+
+            <div v-for="c in obj.columns" class="jtk-schema-table-column" :data-type="c.datatype" :data-primary-key="c.primaryKey" :data-jtk-port="c.id" :data-jtk-scope="c.datatype" data-jtk-source="true" data-jtk-target="true">
+                <div class="jtk-schema-table-column-delete jtk-schema-delete" v-on:click="deleteColumn(c.id)"></div>
+                <div><span>{{c.name}}</span></div>
+                <div class="jtk-schema-table-column-edit jtk-schema-edit" v-on:click="editColumn(c.id)"></div>
+            </div>
+
         </div>
     </div>
 </template>
@@ -17,7 +23,6 @@
 
     import {defineComponent} from "vue"
     import { BaseNodeComponent } from '@jsplumbtoolkit/browser-ui-vue3'
-    import ColumnComponent from './ColumnComponent.vue'
 
     import { COLUMN } from '../constants'
     import { datatypes } from "../definitions";
@@ -25,7 +30,6 @@
 
     export default defineComponent({
         mixins:[BaseNodeComponent],
-        components:{ColumnComponent},
         methods:{
           deleteTable:function(){
               this.getToolkit().removeNode(this.getNode())
@@ -40,6 +44,13 @@
                   primaryKey: false,
                   datatype: datatypes[0].id
               });
+          },
+          deleteColumn:function(id) {
+            this.getToolkit().removePort(this.getNode(), id)
+          },
+          editColumn:function(id) {
+            const column = this.getNode().getPort(id)
+            this.getToolkit().setSelection(column)
           }
         }
     })

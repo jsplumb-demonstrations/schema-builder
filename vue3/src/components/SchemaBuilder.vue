@@ -39,8 +39,8 @@
         consume, LabelOverlay
     } from "@jsplumbtoolkit/browser-ui"
 
-    import { edgeMappings, cardinalities, datatypes } from "../definitions";
-    import { TABLE, VIEW, COLUMN, RELATIONSHIP, COLUMNS, COMMON } from "../constants";
+    import { edgeMappings, cardinalities } from "../definitions";
+    import { TABLE, VIEW, COLUMNS, COMMON } from "../constants";
 
     import TableComponent from "./TableComponent.vue";
     import Inspector from "./Inspector.vue";
@@ -165,7 +165,7 @@
                         endpoint:{
                             type:DotEndpoint.type,
                             options:{
-                                cssClass:".jtk-schema-endpoint"
+                                cssClass:"jtk-schema-endpoint"
                             }
                         }
                     },
