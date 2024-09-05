@@ -12,7 +12,7 @@
 <script>
 
     import { loadSurface } from "@jsplumbtoolkit/browser-ui-vue3";
-    import { EVENT_UNDOREDO_UPDATE, EVENT_CANVAS_CLICK, SurfaceMode } from "@jsplumbtoolkit/browser-ui"
+    import { EVENT_UNDOREDO_UPDATE, EVENT_CANVAS_CLICK, SURFACE_MODE_PAN, SURFACE_MODE_SELECT } from "@jsplumbtoolkit/browser-ui"
 
     let container;
     let surfaceId;
@@ -31,10 +31,10 @@
         },
         methods:{
             panMode:function() {
-                _getSurface((s) => s.setMode(SurfaceMode.PAN))
+                _getSurface((s) => s.setMode(SURFACE_MODE_PAN))
             },
             selectMode:function() {
-                _getSurface((s) => s.setMode(SurfaceMode.SELECT))
+                _getSurface((s) => s.setMode(SURFACE_MODE_SELECT))
             },
             zoomToFit:function() {
                 debugger
