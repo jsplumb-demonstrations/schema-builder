@@ -43,7 +43,6 @@ body {
     position: absolute;
     left: 25px;
     z-index: 1;
-    font-size:14px;
 }
 
 .jtk-demo-main .description {
@@ -114,13 +113,17 @@ body {
     /*@include anEditButton;*/
 }
 
+.jtk-node {
+    z-index: 22;
+}
+
 .jtk-schema-element {
 
     border: 1px solid;
     cursor: pointer;
     font-size: 12px;
     background-color: white;
-    z-index: 12;
+
     overflow: hidden;
     min-width: 80px;
     min-height: 30px;

@@ -1,25 +1,25 @@
 <template>
     <div style="width:100%;height:100%;display:flex">
         <div class="jtk-demo-canvas">
-            <jsplumb-toolkit ref="toolkitComponent"
-                             surface-id="surfaceId"
+            <SurfaceComponent ref="toolkitComponent"
                              :render-params="this.renderParams()"
                              :view="this.viewParams()"
                              :toolkit-params="this.toolkitParams()"
-                             url="schema-1.json"
-            >
+                             url="schema-1.json">
 
-            </jsplumb-toolkit>
-            <Controls surface-id="surfaceId"></Controls>
-            <jsplumb-miniview surface-id="surfaceId"></jsplumb-miniview>
+            </SurfaceComponent>
+
+            <ControlsComponent />
+
+            <MiniviewComponent />
         </div>
         <div class="jtk-demo-rhs">
-            <Palette surface-id="surfaceId"
-                     selector="[data-type]"
+
+            <Palette selector="[data-type]"
                      v-bind:data-generator="dataGenerator">
             </Palette>
             <div id="inspector">
-                <Inspector surface-id="surfaceId"></Inspector>
+                <Inspector/>
             </div>
             <div class="description">
                 <p>This sample application is a builder for database schemas.</p>
@@ -44,7 +44,6 @@
 
     import TableComponent from "./TableComponent.vue";
     import Inspector from "./Inspector.vue";
-    import Controls from './Controls.vue'
     import Palette from './Palette.vue'
     import ViewComponent from "./ViewComponent.vue";
 
@@ -53,7 +52,8 @@
     let surface
 
     export default defineComponent({
-        components: {Inspector, Controls, Palette},
+        components: { Inspector, Palette},
+
         mounted() {
 
             toolkitComponent = this.$refs.toolkitComponent;
@@ -62,6 +62,7 @@
                 surface = s;
                 toolkit = surface.toolkitInstance;
             })
+
 
         },
         methods:{

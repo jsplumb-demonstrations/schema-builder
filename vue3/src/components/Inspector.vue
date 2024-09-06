@@ -37,7 +37,7 @@
 <script>
 
     import { nextTick } from "vue"
-    import {loadSurface} from "@jsplumbtoolkit/browser-ui-vue3";
+    import {loadSurface, DEFAULT_VUE_SURFACE_ID} from "@jsplumbtoolkit/browser-ui-vue3";
     import { Inspector, isNode, isPort } from "@jsplumbtoolkit/browser-ui"
 
     import { cardinalities, datatypes } from '../definitions'
@@ -58,11 +58,10 @@
             }
         },
         props:{
-            surfaceId:String,
             edgeMappings:Array
         },
         mounted() {
-            loadSurface(this.surfaceId, (surface) => {
+            loadSurface(DEFAULT_VUE_SURFACE_ID, (surface) => {
 
                 // create an inspector. give it the container element
                 // and the surface and functions to use to render an
