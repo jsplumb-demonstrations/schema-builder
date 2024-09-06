@@ -2,28 +2,16 @@
     <div style="width:100%;height:100%;display:flex">
         <div class="jtk-demo-canvas">
             <SurfaceComponent ref="toolkitComponent"
-                             :render-params="this.renderParams()"
-                             :view="this.viewParams()"
-                             :toolkit-params="this.toolkitParams()"
-                             url="schema-1.json">
-
-            </SurfaceComponent>
-
-            <ControlsComponent />
-
-            <MiniviewComponent />
+                             :renderOptions="this.renderParams()"
+                             :viewOptions="this.viewParams()"
+                             :toolkitOptions="this.toolkitParams()"
+                             url="schema-1.json"/>
+            <ControlsComponent/>
+            <MiniviewComponent/>
         </div>
         <div class="jtk-demo-rhs">
-
-            <Palette selector="[data-type]"
-                     v-bind:data-generator="dataGenerator">
-            </Palette>
-            <div id="inspector">
-                <Inspector/>
-            </div>
-            <div class="description">
-                <p>This sample application is a builder for database schemas.</p>
-            </div>
+            <Palette selector="[data-type]" v-bind:data-generator="dataGenerator"/>
+            <Inspector/>
         </div>
     </div>
 </template>
