@@ -89,6 +89,7 @@ export class InspectorComponent implements AfterViewInit {
                 surface,
                 renderEmptyContainer:() => {
                     this.currentType = ''
+                  this.changeDetector.detectChanges()
                 },
                 refresh:(obj:Base, cb:() => void) => {
                     this.currentType = isNode(obj) ? obj.type : isPort(obj) ? "column" : "edge"
