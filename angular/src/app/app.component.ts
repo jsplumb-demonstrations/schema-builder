@@ -5,7 +5,7 @@ import {AnchorLocations, consume, DEFAULT,
   Edge,
   EVENT_CANVAS_CLICK, EVENT_CLICK, EVENT_TAP, ForceDirectedLayout, LabelOverlay,
   LassoPlugin,
-  StateMachineConnector, Surface, SelectionModes, Vertex, isPort } from "@jsplumbtoolkit/browser-ui"
+  QuadraticBezierConnector, Surface, SelectionModes, Vertex, isPort } from "@jsplumbtoolkit/browser-ui"
 import {TableNodeComponent} from "./table.node.component"
 import {ViewNodeComponent} from "./view.node.component"
 import {ColumnComponent} from "./column.component"
@@ -69,7 +69,7 @@ export class AppComponent implements AfterViewInit {
       [DEFAULT]: {
         detachable: false,
         anchor: [AnchorLocations.Left, AnchorLocations.Right],
-        connector: StateMachineConnector.type,
+        connector: QuadraticBezierConnector.type,
         cssClass: "jtk-schema-common-edge",
         events: {
           [EVENT_CLICK]: (params: { edge: Edge, e:Event }) => {
