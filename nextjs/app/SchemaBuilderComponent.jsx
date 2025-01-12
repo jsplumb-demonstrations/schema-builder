@@ -11,7 +11,7 @@ import {
     isPort,
     DEFAULT,
     AnchorLocations,
-    StateMachineConnector,
+    QuadraticBezierConnector,
     EVENT_CLICK,
     EVENT_TAP,
     LabelOverlay,
@@ -139,7 +139,7 @@ export default function SchemaBuilderComponent() {
             [DEFAULT]: {
                 detachable: false,
                     anchor: [AnchorLocations.Left, AnchorLocations.Right],
-                    connector: StateMachineConnector.type,
+                    connector: QuadraticBezierConnector.type,
                     cssClass: "jtk-schema-common-edge",
                     events: {
                     [EVENT_CLICK]: (params) => {
