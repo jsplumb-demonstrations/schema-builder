@@ -8,29 +8,22 @@ import {
     EVENT_CANVAS_CLICK,
     LassoPlugin,
     VanillaSurfaceRenderOptions,
-    StateMachineConnector,
+    QuadraticBezierConnector,
     AnchorLocations,
     EVENT_TAP,
-    Edge,
-    LabelOverlay,
-    consume,
     Vertex,
     isPort,
-    ObjectData,
-    EVENT_CLICK,
     SurfaceDropManager,
     SurfaceObjectInfo,
     Port, Node,
     ControlsComponent,
-    uuid, MiniviewPlugin
+    uuid, MiniviewPlugin, EVENT_CLICK, Edge, LabelOverlay, consume
 } from "@jsplumbtoolkit/browser-ui"
 
-import {cardinalities, Cardinality, Datatype, edgeMappings, Relationship} from './definitions'
+import {cardinalities, edgeMappings, Relationship} from './definitions'
 import {
-    CLASS_SCHEMA_RELATIONSHIP_CARDINALITY,
     COLUMNS,
-    COMMON, DATATYPE_VARCHAR,
-    PROPERTY_CARDINALITY, TABLE
+    COMMON, DATATYPE_VARCHAR
 } from "./constants"
 import {SchemaBuilderInspector} from "./schema-inspector"
 
@@ -145,7 +138,7 @@ ready(() => {
                 [DEFAULT]: {
                     detachable: false,
                     anchor: [AnchorLocations.Left, AnchorLocations.Right],
-                    connector: StateMachineConnector.type,
+                    connector: QuadraticBezierConnector.type,
                     cssClass: "jtk-schema-common-edge",
                     events: {
                         [EVENT_CLICK]: (params: { edge: Edge, e:Event }) => {
@@ -250,7 +243,7 @@ ready(() => {
         }
     })
 
-    const inspector = new SchemaBuilderInspector({
+    new SchemaBuilderInspector({
         surface,
         container:inspectorElement
     })

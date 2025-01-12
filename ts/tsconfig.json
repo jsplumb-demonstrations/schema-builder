@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es6",
+    "module": "es6",
     "outDir": "_build_es6",
     "moduleResolution": "node",
     "sourceMap": false,
@@ -11,7 +11,8 @@
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
     "allowJs":false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "lib": ["dom", "es6"]
   },
   "include": [
     "*.ts"
