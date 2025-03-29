@@ -20,9 +20,9 @@
   </div>
   <div class="jtk-demo-rhs">
     <!-- the node palette -->
-    <div class="sidebar node-palette" jsplumb-surface-drop selector="div" [dataGenerator]="dataGenerator">
-      <div data-type="table" class="jtk-schema-palette-item">Table</div>
-      <div data-type="view" class="jtk-schema-palette-item">View</div>
+    <div class="sidebar node-palette" jsplumb-surface-drop selector="div">
+      <div data-jtk-type="table" data-jtk-name="New Table" class="jtk-schema-palette-item">Table</div>
+      <div data-jtk-type="view" data-jtk-name="New View" class="jtk-schema-palette-item">View</div>
     </div>
     <!-- node/edge inspector -->
     <app-inspector></app-inspector>

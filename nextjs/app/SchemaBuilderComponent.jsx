@@ -11,7 +11,7 @@ import {
     isPort,
     DEFAULT,
     AnchorLocations,
-    QuadraticBezierConnector,
+    StraightConnector,
     EVENT_CLICK,
     EVENT_TAP,
     LabelOverlay,
@@ -112,7 +112,7 @@ export default function SchemaBuilderComponent() {
             endpoint:{
                 type:DotEndpoint.type,
                 options:{
-                    cssClass:".jtk-schema-endpoint"
+                    cssClass:"jtk-schema-endpoint"
                 }
             }
         },
@@ -123,25 +123,31 @@ export default function SchemaBuilderComponent() {
         nodes:{
             "table": {
                 jsx: (ctx) => <TableComponent ctx={ctx}/>
-},
-    "view": {
-        jsx: (ctx) => <ViewComponent ctx={ctx}/>
-    }
-},
+        },
+        "view": {
+            jsx: (ctx) => <ViewComponent ctx={ctx}/>
+        }
+    },
     ports: {
         [DEFAULT]: {
             jsx:(ctx) => { return <ColumnComponent ctx={ctx}/> },
                 edgeType: COMMON, // the type of edge for connections from this port type
-                    maxConnections: -1 // no limit on connections
+                maxConnections: -1 // no limit on connections
             }
         },
         edges:{
             [DEFAULT]: {
                 detachable: false,
-                    anchor: [AnchorLocations.Left, AnchorLocations.Right],
-                    connector: QuadraticBezierConnector.type,
-                    cssClass: "jtk-schema-common-edge",
-                    events: {
+                anchor: [AnchorLocations.Left, AnchorLocations.Right],
+                avoidVertices:true,
+                connector:{
+                    type:StraightConnector.type,
+                    options:{
+                        smooth:true
+                    }
+                },
+                cssClass: "jtk-schema-common-edge",
+                events: {
                     [EVENT_CLICK]: (params) => {
                         // defaultPrevented is true when this was a delete edge click.
                         if (!params.e.defaultPrevented) {

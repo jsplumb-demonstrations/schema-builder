@@ -5,7 +5,11 @@ import {AnchorLocations, consume, DEFAULT,
   Edge,
   EVENT_CANVAS_CLICK, EVENT_CLICK, EVENT_TAP, ForceDirectedLayout, LabelOverlay,
   LassoPlugin,
-  QuadraticBezierConnector, Surface, SelectionModes, Vertex, isPort } from "@jsplumbtoolkit/browser-ui"
+  StraightConnector,
+  Surface,
+  SelectionModes,
+  Vertex,
+  isPort } from "@jsplumbtoolkit/browser-ui"
 import {TableNodeComponent} from "./table.node.component"
 import {ViewNodeComponent} from "./view.node.component"
 import {ColumnComponent} from "./column.component"
@@ -39,16 +43,6 @@ export class AppComponent implements AfterViewInit {
     })
   }
 
-  dataGenerator = (el:Element) => {
-    const type = el.getAttribute("data-type")
-    return {
-      type,
-      name:type,
-      w: 120,
-      h: 80
-    }
-  }
-
   view = {
     nodes:{
       table:{
@@ -69,7 +63,13 @@ export class AppComponent implements AfterViewInit {
       [DEFAULT]: {
         detachable: false,
         anchor: [AnchorLocations.Left, AnchorLocations.Right],
-        connector: QuadraticBezierConnector.type,
+        avoidVertices:true,
+        connector:{
+          type:StraightConnector.type,
+          options:{
+            smooth:true
+          }
+        },
         cssClass: "jtk-schema-common-edge",
         events: {
           [EVENT_CLICK]: (params: { edge: Edge, e:Event }) => {
@@ -101,7 +101,7 @@ export class AppComponent implements AfterViewInit {
   renderParams = {
     dragOptions: {
       filter:[
-        "jtk-delete-button", "jtk-add-button", "jtk-schema-add"
+        ".jtk-delete-button", ".jtk-add-button", ".jtk-schema-add"
       ].join(",")
     },
     plugins:[
@@ -126,7 +126,7 @@ export class AppComponent implements AfterViewInit {
       endpoint:{
         type:DotEndpoint.type,
         options:{
-          cssClass:".jtk-schema-endpoint"
+          cssClass:"jtk-schema-endpoint"
         }
       }
     },

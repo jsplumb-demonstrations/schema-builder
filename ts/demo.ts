@@ -17,7 +17,7 @@ import {
     SurfaceObjectInfo,
     Port, Node,
     ControlsComponent,
-    uuid, MiniviewPlugin, EVENT_CLICK, Edge, LabelOverlay, consume
+    uuid, MiniviewPlugin, EVENT_CLICK, Edge, LabelOverlay, consume, StraightConnector
 } from "@jsplumbtoolkit/browser-ui"
 
 import {cardinalities, edgeMappings, Relationship} from './definitions'
@@ -91,7 +91,7 @@ ready(() => {
             endpoint:{
                 type:DotEndpoint.type,
                 options:{
-                    cssClass:".jtk-schema-endpoint"
+                    cssClass:"jtk-schema-endpoint"
                 }
             }
         },
@@ -138,7 +138,14 @@ ready(() => {
                 [DEFAULT]: {
                     detachable: false,
                     anchor: [AnchorLocations.Left, AnchorLocations.Right],
-                    connector: QuadraticBezierConnector.type,
+                    //connector: QuadraticBezierConnector.type,
+                    avoidVertices:true,
+                    connector:{
+                        type:StraightConnector.type,
+                        options:{
+                            smooth:true
+                        }
+                    },
                     cssClass: "jtk-schema-common-edge",
                     events: {
                         [EVENT_CLICK]: (params: { edge: Edge, e:Event }) => {

@@ -1,6 +1,10 @@
 <template>
     <div class="jtk-schema-palette">
-        <div class="jtk-schema-palette-item" :data-type="entry.type" title="Drag to add new" v-for="entry in data" :key="entry.type">
+        <div class="jtk-schema-palette-item"
+             :data-jtk-type="entry.type"
+             :data-jtk-name="entry.label"
+             title="Drag to add new"
+             v-for="entry in data" :key="entry.type">
             {{entry.label}}
         </div>
     </div>

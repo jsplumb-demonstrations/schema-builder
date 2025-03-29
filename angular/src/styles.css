@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "../node_modules/@jsplumbtoolkit/browser-ui/css/jsplumbtoolkit.css";
-@import "../node_modules/@jsplumbtoolkit/browser-ui/css/jsplumbtoolkit-controls.css";
 
 /* import the styles from the non-angular schema builder demo css*/
 @import "./app.css";

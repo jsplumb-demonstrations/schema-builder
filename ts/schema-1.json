@@ -21,7 +21,9 @@
                     "name": "title",
                     "datatype": "varchar"
                 }
-            ]
+            ],
+            "left": 891,
+            "top": 53
         },
         {
             "id": "book_author",
@@ -38,7 +40,9 @@
                     "name": "author_id",
                     "datatype": "integer"
                 }
-            ]
+            ],
+            "left": 474,
+            "top": 151
         },
         {
             "id": "author",
@@ -61,7 +65,9 @@
                     "name": "contact_id",
                     "datatype": "varchar"
                 }
-            ]
+            ],
+            "left": 862,
+            "top": 370
         },
         {
             "id": "publisher",
@@ -104,7 +110,9 @@
                     "name": "contact_id",
                     "datatype": "varchar"
                 }
-            ]
+            ],
+            "left": 18,
+            "top": 11
         },
         {
             "id": "contacts",
@@ -112,7 +120,7 @@
             "type": "table",
             "columns": [
                 {
-                    "id":"id",
+                    "id": "id",
                     "primaryKey": true,
                     "name": "id",
                     "datatype": "varchar"
@@ -142,7 +150,9 @@
                     "name": "contact_type",
                     "datatype": "varchar"
                 }
-            ]
+            ],
+            "left": 346,
+            "top": 343
         },
         {
             "id": "book_publisher",
@@ -159,13 +169,17 @@
                     "name": "publisher_id",
                     "datatype": "integer"
                 }
-            ]
+            ],
+            "left": 500,
+            "top": -112
         },
         {
             "id": "books_by_author",
             "name": "Books By Author",
             "type": "view",
-            "query": "SELECT * FROM book b INNER JOIN book_author ba ON b.id = ba.book_id GROUP BY ba.author_id"
+            "query": "SELECT * FROM book b INNER JOIN book_author ba ON b.id = ba.book_id GROUP BY ba.author_id",
+            "left": 940,
+            "top": -154
         }
     ],
     "edges": [
@@ -177,6 +191,13 @@
             }
         },
         {
+            "source": "book.id",
+            "target": "book_publisher.book_id",
+            "data": {
+                "cardinality": "1:1"
+            }
+        },
+        {
             "source": "author.id",
             "target": "book_author.author_id",
             "data": {
@@ -184,8 +205,8 @@
             }
         },
         {
-            "source": "book.id",
-            "target": "book_publisher.book_id",
+            "source": "author.contact_id",
+            "target": "contacts.id",
             "data": {
                 "cardinality": "1:1"
             }
@@ -203,13 +224,7 @@
             "data": {
                 "cardinality": "1:1"
             }
-        },
-        {
-            "source": "author.contact_id",
-            "target": "contacts.id",
-            "data": {
-                "cardinality": "1:1"
-            }
         }
-    ]
+    ],
+    "groups": []
 }

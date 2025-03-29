@@ -3,6 +3,10 @@ body {
     font-family: sans-serif;
 }
 
+jsplumb-controls {
+  position:absolute;
+}
+
 .jtk-demo-main {
     display: flex;
     height: 100vh;
@@ -249,8 +253,8 @@ body {
     padding: 8px;
     width: 128px;
     text-align: center;
-    margin: 10px;
     outline: none;
+  margin: 10px;
 }
 
 /* ----------------------------------------------------------------------------------------------------- */
@@ -294,6 +298,10 @@ body {
     border-radius: 12px;
     cursor: pointer;
     text-align: center;
+}
+
+.jtk-schema-endpoint {
+  z-index:12;
 }
 
 .jtk-schema-endpoint circle {

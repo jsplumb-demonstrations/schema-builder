@@ -288,6 +288,10 @@
     text-align: center;
 }
 
+.jtk-schema-endpoint {
+    z-index:12;
+}
+
 .jtk-schema-endpoint circle {
     fill:black;
 }

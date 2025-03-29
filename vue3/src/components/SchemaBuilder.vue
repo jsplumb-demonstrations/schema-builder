@@ -10,7 +10,7 @@
             <MiniviewComponent/>
         </div>
         <div class="jtk-demo-rhs">
-            <Palette selector="[data-type]" v-bind:data-generator="dataGenerator"/>
+            <Palette />
             <Inspector/>
         </div>
     </div>
@@ -164,22 +164,7 @@
         },
         data:() => {
             return {
-                edgeMappings:edgeMappings,
-                dataGenerator:(el) => {
-                    const type = el.getAttribute("data-type"),
-                        base = {
-                            name:el.getAttribute("data-type"),
-                            type
-                        };
-
-                    if (type === TABLE) {
-                        base.columns = []
-                    } else {
-                        base.query =''
-                    }
-
-                    return base
-                }
+                edgeMappings:edgeMappings
             }
         }
     })

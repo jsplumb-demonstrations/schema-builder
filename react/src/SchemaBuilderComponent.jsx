@@ -9,7 +9,7 @@ import {
     isPort,
     DEFAULT,
     AnchorLocations,
-    StateMachineConnector,
+    StraightConnector,
     EVENT_CLICK,
     EVENT_TAP,
     LabelOverlay,
@@ -23,7 +23,6 @@ import {
 import {
     SurfaceComponent,
     MiniviewComponent,
-    PaletteComponent,
     ControlsComponent,
     SurfaceProvider
 } from "@jsplumbtoolkit/browser-ui-react";
@@ -88,10 +87,11 @@ export default function SchemaBuilderComponent() {
             }
         },
         defaults:{
+            edgesAvoidVertices:true,
             endpoint:{
                 type:DotEndpoint.type,
                 options:{
-                    cssClass:".jtk-schema-endpoint"
+                    cssClass:"jtk-schema-endpoint"
                 }
             }
         },
@@ -102,11 +102,11 @@ export default function SchemaBuilderComponent() {
         nodes:{
             "table": {
                 jsx: (ctx) => <TableComponent ctx={ctx}/>
-},
-    "view": {
-        jsx: (ctx) => <ViewComponent ctx={ctx}/>
-    }
-},
+            },
+            "view": {
+                jsx: (ctx) => <ViewComponent ctx={ctx}/>
+            }
+    },
     ports: {
         [DEFAULT]: {
             jsx:(ctx) => { return <ColumnComponent ctx={ctx}/> },
@@ -117,10 +117,16 @@ export default function SchemaBuilderComponent() {
         edges:{
             [DEFAULT]: {
                 detachable: false,
-                    anchor: [AnchorLocations.Left, AnchorLocations.Right],
-                    connector: StateMachineConnector.type,
-                    cssClass: "jtk-schema-common-edge",
-                    events: {
+                anchor: [AnchorLocations.Left, AnchorLocations.Right],
+                //avoidVertices:true,
+                connector:{
+                    type:StraightConnector.type,
+                    options:{
+                        smooth:true
+                    }
+                },
+                cssClass: "jtk-schema-common-edge",
+                events: {
                     [EVENT_CLICK]: (params) => {
                         // defaultPrevented is true when this was a delete edge click.
                         if (!params.e.defaultPrevented) {
