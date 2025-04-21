@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core'
+import {AfterViewInit, Component, inject, ViewChild} from '@angular/core'
 import {BrowserUIAngular, jsPlumbService, SurfaceComponent} from "@jsplumbtoolkit/browser-ui-angular"
 import {AnchorLocations, consume, DEFAULT,
   DotEndpoint,
@@ -25,17 +25,12 @@ export class AppComponent implements AfterViewInit {
   // @ts-ignore
   @ViewChild(SurfaceComponent) surfaceComponent:SurfaceComponent;
 
-  // @ts-ignore
-  toolkit:BrowserUIAngular
-  // @ts-ignore
-  surface:Surface
+  toolkit!:BrowserUIAngular
 
-  constructor(public $jsplumb:jsPlumbService) {
-  }
+  $jsplumb = inject(jsPlumbService)
 
   ngAfterViewInit() {
 
-    this.surface = this.surfaceComponent.surface
     this.toolkit = this.surfaceComponent.toolkit
 
     this.toolkit.load({
