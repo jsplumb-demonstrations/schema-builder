@@ -1,13 +1,12 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input} from "@angular/core"
-import {DEFAULT_ANGULAR_SURFACE_ID, jsPlumbService} from "@jsplumbtoolkit/browser-ui-angular"
-import {Base, Inspector, Edge, isNode, isPort } from "@jsplumbtoolkit/browser-ui"
-
+import {Component} from "@angular/core"
+import {InspectorComponent} from "@jsplumbtoolkit/browser-ui-angular"
+import {Edge, isNode, isPort, Base} from "@jsplumbtoolkit/browser-ui"
 
 import {
-  VIEW, TABLE, COLUMN
+  VIEW, TABLE, COLUMN, PROPERTY_CARDINALITY
 } from "./constants"
 
-import {datatypes, edgeMappings} from "./definitions"
+import {datatypes, cardinalities} from "./definitions"
 
 /**
  * Inspector for the schema builder.  This component wraps the Toolkit's `Inspector` class, which is a render-agnostic manager
@@ -28,78 +27,63 @@ import {datatypes, edgeMappings} from "./definitions"
  */
 @Component({
     template:`<div class="inspector">
+      
         
-        <div *ngIf="currentType === ''"></div>
-        
-        <div *ngIf="currentType === 'Edge'" class="jtk-inspector jtk-edge-inspector">
-            <div>Label</div>
-            <input type="text" jtk-att="label">
-            <div>Line style</div>
-            <jtk-edge-type [edgeMappings]="edgeMappings" propertyName="lineStyle" [inspector]="inspector"></jtk-edge-type>
-            <div>Color</div>
-            <input type="color" jtk-att="color">
+      @if(currentType === 'Edge') {
+        <div class="jtk-inspector jtk-edge-inspector">
+            <div>Cardinality</div>    
+            @for(c of cardinalities;track c) {                   
+                <label>
+                <input type="radio" name="${PROPERTY_CARDINALITY}" jtk-att="${PROPERTY_CARDINALITY}" [value]="c.id"/>
+                {{c.name}}
+                </label>
+            }    
         </div>
+      }  
         
-        <div *ngIf="currentType === TYPE_VIEW" class="jtk-inspector jtk-node-inspector">
+      @if(currentType === TYPE_VIEW) {
+        <div class="jtk-inspector jtk-node-inspector">
           <div>Name</div>
           <input type="text" jtk-att="name" jtk-focus="true">
           <div>Query</div>
           <textarea jtk-att="query" rows="10"></textarea>
         </div>
+      }  
 
-        <div *ngIf="currentType === TYPE_TABLE" class="jtk-inspector jtk-node-inspector">
+      @if(currentType === TYPE_TABLE) {
+        <div class="jtk-inspector jtk-node-inspector">
           <div>Name</div>
           <input type="text" jtk-att="name" jtk-focus="true"/>
         </div>
+      }  
 
-      <div *ngIf="currentType === TYPE_COLUMN" class="jtk-inspector jtk-node-inspector">
-        <div>Name</div>
-        <input type="text" jtk-att="name" jtk-focus/>
-        <div>Datatype</div>
-        <label *ngFor="let d of datatypes"><input type="radio" jtk-att="datatype" name="datatype" value="{{d.id}}"/>{{d.description}}</label>
-      </div>
+      @if(currentType === TYPE_COLUMN) {
+        <div class="jtk-inspector jtk-node-inspector">
+          <div>Name</div>
+          <input type="text" jtk-att="name" jtk-focus/>
+          <div>Datatype</div>
+          @for(d of datatypes;track d) {
+            <label ><input type="radio" jtk-att="datatype" name="datatype" value="{{d.id}}"/>{{d.description}}</label>
+          }  
+        </div>
+      }
       
     </div>`,
     selector:"app-inspector"
 })
-export class InspectorComponent implements AfterViewInit {
+export class SchemaInspectorComponent extends InspectorComponent {
 
-    currentType:string = ''
-
-    // @ts-ignore
-    @Input() surfaceId:string = DEFAULT_ANGULAR_SURFACE_ID
-
-  // expose these on the class so the jtk-edge-type component can pick them up.
-  edgeMappings = edgeMappings
+  // expose these on the class so the template can pick them up.
+  cardinalities = cardinalities
   TYPE_VIEW = VIEW
   TYPE_TABLE = TABLE
   TYPE_COLUMN = COLUMN
   datatypes = datatypes
 
-    // @ts-ignore
-    inspector:Inspector
 
-    constructor(private $jsplumb:jsPlumbService, private el:ElementRef, private changeDetector:ChangeDetectorRef) { }
-
-    ngAfterViewInit(): void {
-
-        this.$jsplumb.getSurface(this.surfaceId, (surface) => {
-            this.inspector = new Inspector({
-                container:this.el.nativeElement,
-                surface,
-                renderEmptyContainer:() => {
-                    this.currentType = ''
-                  this.changeDetector.detectChanges()
-                },
-                refresh:(obj:Base, cb:() => void) => {
-                    this.currentType = isNode(obj) ? obj.type : isPort(obj) ? "column" : "edge"
-                    setTimeout(cb, 0)
-                    this.changeDetector.detectChanges()
-                }
-            })
-        })
-    }
-
-
-
+  override refresh(obj: Base): void {
+    this.currentType = isNode(obj) ? obj.type : isPort(obj) ? COLUMN : Edge.objectType
+  }
 }
+
+
