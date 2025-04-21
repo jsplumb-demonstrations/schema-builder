@@ -7,11 +7,11 @@ import { AppComponent } from './app.component';
 import {TableNodeComponent} from "./table.node.component"
 import {ViewNodeComponent} from "./view.node.component"
 import {ColumnComponent} from "./column.component"
-import {InspectorComponent} from "./inspector.component"
+import {SchemaInspectorComponent} from "./inspector.component"
 
 @NgModule({
   declarations: [
-    AppComponent, TableNodeComponent, ViewNodeComponent, ColumnComponent, InspectorComponent
+    AppComponent, TableNodeComponent, ViewNodeComponent, ColumnComponent, SchemaInspectorComponent
   ],
   imports: [
     BrowserModule,
